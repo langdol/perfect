@@ -1,0 +1,62 @@
+#include <stdio.h>
+int testPerfect(int *f) // 완전수인지 판별
+{
+	int i, s = 0;
+	if (*f == 0) // 입력 받은 수가 0 이면 0을 반환
+	{
+		return 0;
+	}
+	for (i = 1; i < *f; i++) // 1부터 입력 받은 수 전까지 차레대로 나눠서 나머지가 0인 수를 더하기
+	{
+		if ((*f % i) == 0)
+		{
+			s += i;
+		}
+	}
+	if (s == *f) // 더한 수가 입력된 값이랑 같으면 1을 반환
+	{
+		return 1;
+	}
+	else  // 아니면 0을 반환
+		return 0;
+	
+}
+void printFactors(int *f) // 최종 출력
+{
+	int s = 0;
+	int i = 0;
+	if (testPerfect(f) == 1) // 1을 반환 받았다면 완전수
+	{
+		printf("%d : ", *f);
+		for (i = *f-1; i < *f && i > 0; i--) // 큰 수 부터 출력하도록. 입력된 값은 포함되면 안되므로 1 작게. 0으로 나눌 수는 없기에 i는 0보다 크다.
+		{
+			if ((*f % i) == 0)
+			{
+				printf("%d ", i);        
+			}
+		}
+		printf("\n");
+	}
+	else // 아니면 완전수가 아니다.
+	{
+		printf("%d : 완전수가 아닙니다.\n", *f);
+	}
+}
+int main()
+{
+	int g, u;
+	int f = 0;
+	do // 0과 0보다 작은 수가 입력되면 다시 입력.
+	{
+		printf("몇 번 하시겠습니까? : ");
+		scanf_s("%d", &g);
+	} while (g <= 0);
+
+	for (u = 0; u < g; u++) // 횟수 반복.
+	{
+		printf("\n양수를 입력하세요. : ");
+		scanf_s("%d", &f);
+		printFactors(&f);
+	}
+
+}
